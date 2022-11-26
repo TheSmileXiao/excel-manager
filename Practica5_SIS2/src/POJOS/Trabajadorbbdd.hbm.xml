@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 28-may-2022 11:40:32 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="POJOS.Trabajadorbbdd" table="trabajadorbbdd" catalog="nominas" optimistic-lock="version">
+        <id name="idTrabajador" type="java.lang.Integer">
+            <column name="IdTrabajador" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categorias" class="POJOS.Categorias" fetch="select">
+            <column name="IdCategoria" />
+        </many-to-one>
+        <many-to-one name="empresas" class="POJOS.Empresas" fetch="select">
+            <column name="IdEmpresa" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="50" not-null="true" />
+        </property>
+        <property name="apellido1" type="string">
+            <column name="Apellido1" length="75" not-null="true" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="Apellido2" length="75" />
+        </property>
+        <property name="nifnie" type="string">
+            <column name="NIFNIE" length="10" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="75" />
+        </property>
+        <property name="fechaAlta" type="date">
+            <column name="fechaAlta" length="10" />
+        </property>
+        <property name="codigoCuenta" type="string">
+            <column name="codigoCuenta" length="20" />
+        </property>
+        <property name="iban" type="string">
+            <column name="IBAN" length="24" />
+        </property>
+        <set name="nominas" table="nomina" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="IdTrabajador" />
+            </key>
+            <one-to-many class="POJOS.Nomina" />
+        </set>
+    </class>
+</hibernate-mapping>
